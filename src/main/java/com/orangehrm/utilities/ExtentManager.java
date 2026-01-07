@@ -103,7 +103,7 @@ public class ExtentManager {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
 		
 		//Saving the screenshot to a file
-		String destPath = System.getProperty("user.dir") + "/src/test/resources/ExtentReport/screenshots/" + screenshotName + "_" + timeStamp + ".png";
+		String destPath = System.getProperty("user.dir") + "/src/test/resources/screenshots/" + screenshotName + "_" + timeStamp + ".png";
 		
 		File finalPath = new File(destPath);
 		try {

@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import com.orangehrm.base.BaseClass;
 import com.orangehrm.pages.HomePage;
 import com.orangehrm.pages.LoginPage;
+import com.orangehrm.utilities.DataProviders;
 import com.orangehrm.utilities.ExtentManager;
 
 public class LoginPageTest extends BaseClass {
@@ -19,12 +20,12 @@ public class LoginPageTest extends BaseClass {
 		homePage = new HomePage(getDriver());
 	}
 	
-	@Test
-	public void verifyValidLoginTestDetails() {
-		ExtentManager.startTest("Valid Login Test");
+	@Test(dataProvider = "validLoginData", dataProviderClass = DataProviders.class)
+	public void verifyValidLoginTestDetails(String username, String password) {
+		//ExtentManager.startTest("Valid Login Test"); --This has been implemented in TestListener
 		System.out.println("Running testMethod1 on thread: " + Thread.currentThread().getId());
 		ExtentManager.logStep("Navigating to Login Page entering username and password");
-		loginPage.login("Admin", "admin123");
+		loginPage.login(username, password);
 		ExtentManager.logStep("Verifying Admin tab is visible or not");
 		Assert.assertTrue(homePage.isAdminTabVisible(), "Admin Tab should be visible after successful login");
 		ExtentManager.logStep("Validation successful");
@@ -33,13 +34,13 @@ public class LoginPageTest extends BaseClass {
 		staticWait(2);
 	}
 	
-	@Test
-	public void invalidLoginTest() {
-		ExtentManager.startTest("In-Valid Login Test");
+	@Test(dataProvider = "inValidLoginData", dataProviderClass = DataProviders.class)
+	public void invalidLoginTest(String username, String password) {
+		//ExtentManager.startTest("In-Valid Login Test"); --This has been implemented in TestListener
 		System.out.println("Running testMethod2 on thread: " + Thread.currentThread().getId());
 		ExtentManager.logStep("Navigating to Login Page entering username and password");
-		loginPage.login("admin", "admin");
-		String expectedErrorMessage = "Invalid credentials";
+		loginPage.login(username, password);
+		String expectedErrorMessage = "Invalid credentials1";
 		Assert.assertTrue(loginPage.verifyErrorMessage(expectedErrorMessage), "Test failed: Invalid Error Message");
 		ExtentManager.logStep("Validation successful");
 		ExtentManager.logStep("Logged out successfully!");

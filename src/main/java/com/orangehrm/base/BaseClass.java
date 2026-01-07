@@ -38,7 +38,7 @@ public class BaseClass {
 		logger.info("config.properties file is loaded");
 	
 		//Start the Extent Report
-		ExtentManager.getReporter();
+		//ExtentManager.getReporter(); --This has been implemented in TestListener
 	}
 
 	@BeforeMethod
@@ -121,7 +121,7 @@ public class BaseClass {
 		actionDriver.remove();
 		//driver = null;
 		//actionDriver = null;
-		ExtentManager.endTest();
+		//ExtentManager.endTest(); --This has been implemented in TestListener
 	}
 
 	// Driver getter method public WebDriver getDriver() { return driver; }
